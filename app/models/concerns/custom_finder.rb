@@ -5,12 +5,10 @@ module CustomFinder
     keys = args.first.keys
     vals = args.first.values
 
-    if keys.count == 1 && !column_names.include?(keys.first)
-      left_joins(:extended_attributes).where(extended_attributes: { field: keys.first, value: vals.first })
-    else
-      return nil unless keys.map(&:to_s).all? { |e| column_names.include?(e) }
-
+    if keys.map(&:to_s).all? { |e| column_names.include?(e) }
       where(*args)
+    else
+      ExtendedAttribute.where(field: keys, value: vals).compact.map(&:extendable)
     end
   end
 end

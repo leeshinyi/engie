@@ -31,7 +31,7 @@ users.each_with_index do |user, i|
   extended_fields = [
     ['name', Faker::Name.name],
     ['phone', Faker::PhoneNumber.phone_number_with_country_code],
-    ['battery_capacity', rand(10..75)]
+    ['capacity', rand(10..75)]
   ].sample(2)
 
   extended_fields.each do |extended_field|
